@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SearchCountries</string>
+    <string name="flag">Bandeira do país</string>
 </resources>

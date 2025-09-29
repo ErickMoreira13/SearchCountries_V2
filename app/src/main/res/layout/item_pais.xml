@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:background="#D3D3D3"
         android:orientation="vertical"
         android:padding="12dp"
@@ -23,20 +24,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nome do País"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textViewCapital"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Capital" />
+            android:text="Capital"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/textViewRegion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Região" />
+            android:text="Região"
+            android:textSize="20sp" />
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>
