@@ -1,0 +1,32 @@
+package com.example.searchcountries;
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+public class SearchPreferences {
+    private static final String PREFS_NAME = "country_prefs";
+    private static final String KEY_COUNTRIES = "countries";
+
+    public static void saveCountries(Context context, List<Country> countryList) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(countryList);
+        editor.putString(KEY_COUNTRIES, json);
+        editor.apply();
+    }
+
+    public static List<Country> loadCountries(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        String json = prefs.getString(KEY_COUNTRIES, null);
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<Country>>(){}.getType();
+        return json != null ? gson.fromJson(json, type) : new ArrayList<>();
+    }
+}
