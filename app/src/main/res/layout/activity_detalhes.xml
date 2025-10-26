@@ -1,14 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:background="#ECEFF1">
 
-    <TextView
-        android:id="@+id/textViewDetails"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:lineSpacingExtra="4dp"
-        android:textSize="24sp" />
-</ScrollView>
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_details"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="8dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/imageViewFlagDetails"
+                        android:layout_width="150dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:scaleType="centerCrop"
+                        android:layout_marginBottom="16dp" />
+
+                    <TextView
+                        android:id="@+id/textViewDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="8dp"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <org.osmdroid.views.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

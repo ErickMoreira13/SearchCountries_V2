@@ -3,6 +3,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -25,8 +26,19 @@ public class SearchPreferences {
     public static List<Country> loadCountries(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String json = prefs.getString(KEY_COUNTRIES, null);
+        if (json == null) {
+            return new ArrayList<>();
+        }
+
         Gson gson = new Gson();
         Type type = new TypeToken<List<Country>>(){}.getType();
-        return json != null ? gson.fromJson(json, type) : new ArrayList<>();
+        try {
+            return gson.fromJson(json, type);
+        } catch (JsonSyntaxException e) {
+            // Se os dados estiverem em um formato antigo, limpe-os e retorne uma lista vazia.
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.remove(KEY_COUNTRIES).apply();
+            return new ArrayList<>();
+        }
     }
 }

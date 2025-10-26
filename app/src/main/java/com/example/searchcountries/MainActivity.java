@@ -3,6 +3,7 @@ package com.example.searchcountries;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -56,37 +56,46 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchCountries(String query) {
-            RestCountriesApi api = RetrofitClient.getInstance().create(RestCountriesApi.class);
+        RestCountriesApi api = RetrofitClient.getInstance().create(RestCountriesApi.class);
         Call<List<CountryResponse>> call = api.getCountriesByName(query);
 
         call.enqueue(new Callback<List<CountryResponse>>() {
             @Override
             public void onResponse(Call<List<CountryResponse>> call, Response<List<CountryResponse>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<Country> result = new ArrayList<>();
+                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
+                    List<Country> newCountries = new ArrayList<>();
                     for (CountryResponse cr : response.body()) {
-                        String name = cr.getName().getCommon();
-                        String capital = (cr.getCapital() != null && !cr.getCapital().isEmpty()) ? cr.getCapital().get(0) : "N/A";
-                        String region = cr.getRegion() != null ? cr.getRegion() : "N/A";
-                        long population = cr.getPopulation();
-                        double area = cr.getArea();
-                        List<String> languages = new ArrayList<>();
-                        if (cr.getLanguages() != null) languages.addAll(cr.getLanguages().values());
+                        Country newCountry = new Country(cr);
+                        boolean alreadyExists = false;
+                        for (Country existingCountry : countryList) {
+                            if (existingCountry.getName().getCommon().equalsIgnoreCase(newCountry.getName().getCommon())) {
+                                alreadyExists = true;
+                                break;
+                            }
+                        }
 
-                        result.add(new Country(name, capital, region, population, area, languages));
+                        if (!alreadyExists) {
+                            newCountries.add(newCountry);
+                        } else {
+                            Toast.makeText(MainActivity.this, "O país '" + newCountry.getName().getCommon() + "' já está na lista", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    adapter.updateList(result);
-                    SearchPreferences.saveCountries(MainActivity.this, countryList);
+
+                    if (!newCountries.isEmpty()) {
+                        adapter.updateList(newCountries);
+                        SearchPreferences.saveCountries(MainActivity.this, countryList);
+                    }
+
+                } else {
+                    Toast.makeText(MainActivity.this, "País não encontrado", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<CountryResponse>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Erro ao buscar dados", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
             }
         });
     }
-
-
 }
-

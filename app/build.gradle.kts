@@ -41,6 +41,8 @@ dependencies {
     implementation(libs.firebase.crashlytics.buildtools)
     implementation(libs.retrofit)
     implementation(libs.gson)
+    implementation(libs.recyclerview)
+    implementation("org.osmdroid:osmdroid-android:6.1.18") // Corrigido
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
