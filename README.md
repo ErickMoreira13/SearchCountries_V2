@@ -2,7 +2,8 @@
 
 SearchCountries é um aplicativo Android simples e intuitivo que permite **Mostrar dados simples de países**. O app utiliza a API da REST Countries para obter os dados dos países de forma rápida.  
 
-<img width="437" height="930" alt="image" src="https://github.com/user-attachments/assets/c0ce10a4-8ffb-4106-8eb0-e857ae6b942f" /><img width="435" height="931" alt="image" src="https://github.com/user-attachments/assets/cf2eaa2a-9c8d-486c-a2be-4c521f659fcd" />
+<img width="437" height="930" alt="image" src="https://github.com/user-attachments/assets/c0ce10a4-8ffb-4106-8eb0-e857ae6b942f" /><img width="433" height="929" alt="image" src="https://github.com/user-attachments/assets/534dca15-1740-4a81-bfc5-332c3cc6cbfc" />
+
 
 
 
