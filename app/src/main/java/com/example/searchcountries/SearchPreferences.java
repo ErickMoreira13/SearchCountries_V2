@@ -14,6 +14,7 @@ public class SearchPreferences {
     private static final String PREFS_NAME = "country_prefs";
     private static final String KEY_COUNTRIES = "countries";
 
+    // Salvar os países com preferences (persistência de dados)
     public static void saveCountries(Context context, List<Country> countryList) {
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -23,6 +24,7 @@ public class SearchPreferences {
         editor.apply();
     }
 
+    // Carregar a lista de países salvos/buscados
     public static List<Country> loadCountries(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String json = prefs.getString(KEY_COUNTRIES, null);

@@ -55,8 +55,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Buscar os países
     private void fetchCountries(String query) {
+        // caminho_base == api
         RestCountriesApi api = RetrofitClient.getInstance().create(RestCountriesApi.class);
+        // api+query == caminho de pesquisa para o país
         Call<List<CountryResponse>> call = api.getCountriesByName(query);
 
         call.enqueue(new Callback<List<CountryResponse>>() {

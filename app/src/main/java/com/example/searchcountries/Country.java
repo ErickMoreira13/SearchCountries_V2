@@ -14,7 +14,7 @@ public class Country implements Serializable {
     private List<String> languages;
     private List<String> currencies;
     private Flags flags;
-    private List<Double> latlng; // Novo campo
+    private List<Double> latlng; // coordenadas
 
     public Country(CountryResponse response) {
         this.name = response.getName();
@@ -24,17 +24,21 @@ public class Country implements Serializable {
         this.population = response.getPopulation();
         this.area = response.getArea();
         this.languages = new ArrayList<>();
+
         if (response.getLanguages() != null) {
             this.languages.addAll(response.getLanguages().values());
         }
+
         this.currencies = new ArrayList<>();
+
         if (response.getCurrencies() != null) {
             for (CountryResponse.CurrencyInfo currencyInfo : response.getCurrencies().values()) {
                 this.currencies.add(currencyInfo.getName() + " (" + currencyInfo.getSymbol() + ")");
             }
         }
+
         this.flags = response.getFlags();
-        this.latlng = response.getLatlng(); // Preenche o novo campo
+        this.latlng = response.getLatlng();
     }
 
     public static class Name implements Serializable {
@@ -56,5 +60,6 @@ public class Country implements Serializable {
     public List<String> getLanguages() { return languages; }
     public List<String> getCurrencies() { return currencies; }
     public Flags getFlags() { return flags; }
-    public List<Double> getLatlng() { return latlng; } // Getter
+    public List<Double> getLatlng() { return latlng; }
+
 }

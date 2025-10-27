@@ -13,7 +13,7 @@ public class CountryResponse {
     private Map<String, String> languages;
     private Map<String, CurrencyInfo> currencies;
     private Country.Flags flags;
-    private List<Double> latlng; // Novo campo para coordenadas
+    private List<Double> latlng; // Campo para coordenadas
 
     // Classe interna para moedas
     public static class CurrencyInfo {
