@@ -18,6 +18,7 @@ Este projeto foi desenvolvido como parte da disciplina **Programação para Disp
 ## 🚀 Funcionalidades
 
 - Mostrar dados de países (Nome, Capital, Região, População, Área e Linguagens)
+- Mostrar no mapa o país destacado com base na sua coordenada estimada 
 - Interface limpa e fácil de usar  
 
 ---
